@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       tag_name:
-        description: "Tag name for the Docker image"
+        description: "TAG to checkout"
         required: true
         default: "latest"
 
@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.tag_name }}
 
       - name: Setup QEMU
         uses: docker/setup-qemu-action@v3
